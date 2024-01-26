@@ -1,0 +1,5 @@
+# Settings for Visual Studio Code
+.vscode
+
+# User-specific settings
+app/user

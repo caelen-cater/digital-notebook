@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'Playfair';
+            src: url('../assets/fonts/playfair/PlayfairDisplay-Regular.ttf'); /* Adjust path as needed */
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+        }
+
+        body {
+            background: url('../assets/img/desk.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            display: flex;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            background: url('../assets/img/desk.jpg') no-repeat center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            width: 15vw; /* Adjust as needed */
+            height: 100vh;
+            background-color: #393D49;
+            background-image: url('../assets/img/noise.png');
+            background-blend-mode: overlay;
+            box-shadow: 2px 0 10px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .sidebar h1 {
+            color: white;
+            font-family: 'Playfair', serif;
+            padding: 20px; /* Adjust as needed */
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Adjust as needed */
+        }
+
+        .note-separator {
+            color: white;
+            font-family: 'Playfair', serif;
+            padding: 20px; /* Adjust as needed */
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Adjust as needed */
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>Notebook</h1>
+        <div id="notes"></div>
+        <!-- Other sidebar content goes here -->
+    </div>
+    <div class="main-content">
+        <!-- Main content goes here -->
+    </div>
+    <script>
+        // Fetch notes and sort them based on their folder
+        // This is a placeholder function and needs to be replaced with actual logic
+        async function fetchAndSortNotes(userId) {
+            // Fetch notes from `user/[USER ID]/notes/[TIME]`
+            // Sort notes based on their folder
+            // Return sorted notes
+        }
+
+        // Generate HTML for the sidebar
+        async function generateSidebar(userId) {
+            const notes = await fetchAndSortNotes(userId);
+            const notesDiv = document.getElementById('notes');
+
+            // Time separators
+            const timeSeparators = ['Today', 'Last 7 days', 'Last 30 days', '2023', '2022'];
+
+            timeSeparators.forEach(separator => {
+                // Check if there are any notes for this time separator
+                const notesForThisSeparator = notes.filter(note => note.time === separator);
+                if (notesForThisSeparator.length > 0) {
+                    // Add time separator to sidebar
+                    const separatorDiv = document.createElement('div');
+                    separatorDiv.className = 'note-separator';
+                    separatorDiv.textContent = separator;
+                    notesDiv.appendChild(separatorDiv);
+
+                    // Add notes for this time separator to sidebar
+                    notesForThisSeparator.forEach(note => {
+                        const noteDiv = document.createElement('div');
+                        noteDiv.className = 'note';
+                        noteDiv.textContent = note.content; // Replace with actual note content
+                        notesDiv.appendChild(noteDiv);
+                    });
+                }
+            });
+        }
+
+        // Replace with actual user ID
+        generateSidebar('userId');
+    </script>
+</body>
+</html>
